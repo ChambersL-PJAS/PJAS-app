@@ -9,80 +9,28 @@ import {
   View
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { SvgXml } from 'react-native-svg';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 // FILE IMPORTS
-const config = require('./config')
-const logo = require("./assets/images/logo.png")
+const config = require('./config');
+const logo = require("./assets/images/logo.png");
 
+// STYLES IMPORTS
+const styles = require('./style');
 
-// HOME SCREEN
-function HomeScreen({ navigation }) {
-  return (
-    <View style = {styles.container}>
-        
-      {/* Logo */}
-        <Image source = {logo} style = {styles.mainPageLogo}  fadeDuration = {config.fadeDuration} /> 
-      {/* Welcome Message */}
-        <Text style = {styles.homeTitle}>
-          Welcome to the {config.stateMeetYear} PJAS State Meeting app.
-        </Text>
-
-
-      {/* Stylized Text */}
-        <Text style = {styles.h1}>
-          H1 Text
-        </Text>
-        <Text style = {styles.h2}>
-          H2 Text
-        </Text>
-        <Text style = {styles.h3}>
-          H3 Text
-        </Text>
-        <Text style = {styles.defaultText}>
-          Normal size text
-        </Text>
-
-        {/* ABOUT PAGE BUTTON */}
-        <TouchableOpacity
-          onPress={() => navigation.navigate('About')}
-          style ={styles.button}>
-            <Text style = {styles.buttonText}>
-              About This App
-            </Text>
-        </TouchableOpacity>
-
-
-        <TouchableOpacity
-          onPress = {() =>
-            Alert.alert(`Popup!`, `This is a test alert!`, [
-              { text: "Yes" },
-              { text: "No" },
-            ])
-          }
-          style ={styles.button}>
-            <Text style = {styles.buttonText}>
-              Test: alert popup with buttons inside
-            </Text>
-        </TouchableOpacity>
-
-
-        {/* Status Bar */}
-        <StatusBar style = "auto" />
-      </View>
-  );
-}
-
-
-// SECOND SCREEN
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style = {{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress = {() => navigation.goBack()} title = "Go back home" />
-    </View>
-  );
-}
+// PAGE IMPORTS
+import homePage from './screens/homePage';
+import aboutPage from './screens/aboutPage';
+import privacyPolicyPage from './screens/privacyPolicy';
+import schedulePage from './screens/schedulePage';
+import bookletPage from './screens/bookletPage';
+import helpPage from './screens/helpPage';
+import busPage from './screens/busPage';
+import mapPage from './screens/mapPage';
 
 
 
@@ -97,97 +45,81 @@ export default function App() {
         screenOptions = {{
           overlayColor: config.pjasBlue75percent,
           itemStyle: {marginVertical: 5},
+          drawerActiveTintColor: 'white',
+          drawerInactiveTintColor: config.pjasBlue,
+          drawerActiveBackgroundColor: config.pjasLightBlue,
+          swipeEdgeWidth: 500,
         }}
         initialRouteName = "Home"
       >
-        <Drawer.Screen name = "Home" component = {HomeScreen} />
-        <Drawer.Screen name = "Notifications" component = {NotificationsScreen} />
+        <Drawer.Screen
+          name = "Home"
+          component = {homePage}
+          options = {{
+            drawerLabel: 'Home',
+            drawerIcon: (({focused}) => <Icon name = { focused ? 'home-outline' : 'home' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
+          }}
+        />
+        <Drawer.Screen
+          name = "About This App"
+          component = {aboutPage}
+          options = {{
+            drawerLabel: 'About This App',
+            drawerIcon: (({focused}) => <Icon name = { focused ? 'information-circle-outline' : 'information-circle' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
+          }}
+        />
+        <Drawer.Screen
+          name = "Privacy Policy"
+          component = {privacyPolicyPage}
+          options = {{
+            drawerLabel: 'Privacy Policy',
+            drawerIcon: (({focused}) => <Icon name = { focused ? 'push-outline' : 'document' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
+          }}
+        />
+        <Drawer.Screen
+          name = "Schedule"
+          component = {schedulePage}
+          options = {{
+            drawerLabel: 'Schedule',
+            drawerIcon: (({focused}) => <Icon name = { focused ? 'calendar-outline' : 'calendar' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
+          }}
+        />
+        <Drawer.Screen
+          name = "Booklet"
+          component = {bookletPage}
+          options = {{
+            drawerLabel: 'Booklet',
+            drawerIcon: (({focused}) => <Icon name = { focused ? 'book-outline' : 'book' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
+          }}
+        />
+        <Drawer.Screen
+          name = "Buses"
+          component = {busPage}
+          options = {{
+            drawerLabel: 'Buses',
+            drawerIcon: (({focused}) => <Icon name = { focused ? 'bus-outline' : 'bus' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
+          }}
+        />
+        <Drawer.Screen
+          name = "Campus Map"
+          component = {mapPage}
+          options = {{
+            drawerLabel: 'Campus Map',
+            drawerIcon: (({focused}) => <Icon name = { focused ? 'map-outline' : 'map' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
+          }}
+        />
+
+
+
+        <Drawer.Screen
+          name = "Get Help"
+          component = {helpPage}
+          options = {{
+            drawerLabel: 'Get Help',
+            drawerIcon: (({focused}) => <Icon name = { focused ? 'chatbubble-ellipses-outline' : 'chatbubble-ellipses' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
-
-
-
-
-
-
-
-
-/****************************************/
-/* STYLES                               */
-/****************************************/
-const styles = StyleSheet.create({
-  /****************************************/
-  /* CONTAINERS                           */
-  /****************************************/
-  container: {
-    flex: 1,
-    backgroundColor: config.defaultBkgColor,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: 20,
-  },
-  /****************************************/
-  /* BUTTONS                              */
-  /****************************************/
-  button: {
-    backgroundColor: config.pjasBlue,
-    padding: config.buttonPadding,
-    borderRadius: config.buttonBorderRadius,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  buttonText: {
-    fontSize: config.normTextSize,
-    color: "white",
-  },
-  /****************************************/
-  /* IMAGES                               */
-  /****************************************/
-  mainPageLogo: {
-    width: 150,
-    height: 150,
-    marginBottom: 50,
-  },
-  /****************************************/
-  /* TEXT / FONTS                         */
-  /****************************************/
-  defaultText: {
-    color: config.pjasBlue,
-    fontSize: config.normTextSize,
-    marginHorizontal: 15
-  },
-  homeTitle: {
-    textAlignVertical: "center",
-    textAlign: "center",
-    color: config.pjasBlue,
-    fontSize: config.h1TextSize,
-    fontWeight: 'bold',
-    marginHorizontal: 15,
-    marginBottom: 50,
-  },
-
-    /****************************************/
-    /* HEADINGS                             */
-    /****************************************/
-    h1: {
-      color: config.pjasBlue,
-      fontSize: config.h1TextSize,
-      fontWeight: 'bold',
-      marginHorizontal: 15
-    },
-    h2: {
-      color: config.pjasBlue,
-      fontSize: config.h2TextSize,
-      fontWeight: 'bold',
-      marginHorizontal: 15
-    },
-    h3: {
-      color: config.pjasBlue,
-      fontSize: config.h3TextSize,
-      fontWeight: 'bold',
-      marginHorizontal: 15
-    },
-
-});

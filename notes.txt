@@ -1,0 +1,28 @@
+NOTES:
+
+1. YouTube brand request (icon use permission):
+    Applied: Sunday, April 3, 2022
+    Decision: Approved – Monday, April 4, 2022 (11:08AM email timestamp)
+
+2. Facebook brand request:
+    Not required for our application.
+
+3. Twitter brand request:
+    Not required for our application.
+
+
+
+
+
+          <TouchableOpacity
+            onPress = {() =>
+              Alert.alert(`Popup!`, `This is a test alert!`, [
+                { text: "Yes" },
+                { text: "No" },
+              ])
+            }
+            style ={styles.button}>
+              <Text style = {styles.buttonText}>
+                Test: alert popup with buttons inside
+              </Text>
+          </TouchableOpacity>

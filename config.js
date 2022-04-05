@@ -1,10 +1,15 @@
 const config = {
   /* TEXT */
-  stateMeetYear: '2022',
+  stateMeetYear: 2022,
+  stateMeetStart: 15,
+  stateMeetEnd: 17,
+  stateMeetLocation: `Penn State University Park Campus`,
 
   /* COLORS */
   pjasBlue: '#122937',
   pjasBlue75percent: '#122937BF',
+  pjasBlue75percent: '#122937BF',
+  pjasLightBlue: '#367ba5',
   defaultBkgColor: '#eee',
 
 
