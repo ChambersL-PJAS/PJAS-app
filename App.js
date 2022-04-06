@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  useWindowDimensions,
   View
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -13,113 +14,66 @@ import { SvgXml } from 'react-native-svg';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
-// FILE IMPORTS
+// FILES
 const config = require('./config');
 const logo = require("./assets/images/logo.png");
 
-// STYLES IMPORTS
+// COMPONENTS
+import CustomDrawer from './components/CustomDrawer'
+
+// STYLES
 const styles = require('./style');
 
-// PAGE IMPORTS
+// PAGES
 import homePage from './screens/homePage';
 import aboutPage from './screens/aboutPage';
-import privacyPolicyPage from './screens/privacyPolicy';
-import schedulePage from './screens/schedulePage';
+import awardsScholarshipsPage from './screens/awardsScholarshipsPage';
 import bookletPage from './screens/bookletPage';
-import helpPage from './screens/helpPage';
 import busPage from './screens/busPage';
+import diningMenuPage from './screens/diningMenuPage';
+import helpPage from './screens/helpPage';
 import mapPage from './screens/mapPage';
-
+import schedulePage from './screens/schedulePage';
+import AMUnitList from './screens/AMUnitList'
+import PMUnitList from './screens/PMUnitList'
 
 
 
 // DRAWER
 const Drawer = createDrawerNavigator();
 
-export default function App() {
+function MyDrawer() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        screenOptions = {{
-          overlayColor: config.pjasBlue75percent,
-          itemStyle: {marginVertical: 5},
-          drawerActiveTintColor: 'white',
-          drawerInactiveTintColor: config.pjasBlue,
-          drawerActiveBackgroundColor: config.pjasLightBlue,
-          swipeEdgeWidth: 500,
-        }}
-        initialRouteName = "Home"
-      >
-        <Drawer.Screen
-          name = "Home"
-          component = {homePage}
-          options = {{
-            drawerLabel: 'Home',
-            drawerIcon: (({focused}) => <Icon name = { focused ? 'home-outline' : 'home' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
-          }}
-        />
-        <Drawer.Screen
-          name = "About This App"
-          component = {aboutPage}
-          options = {{
-            drawerLabel: 'About This App',
-            drawerIcon: (({focused}) => <Icon name = { focused ? 'information-circle-outline' : 'information-circle' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
-          }}
-        />
-        <Drawer.Screen
-          name = "Privacy Policy"
-          component = {privacyPolicyPage}
-          options = {{
-            drawerLabel: 'Privacy Policy',
-            drawerIcon: (({focused}) => <Icon name = { focused ? 'push-outline' : 'document' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
-          }}
-        />
-        <Drawer.Screen
-          name = "Schedule"
-          component = {schedulePage}
-          options = {{
-            drawerLabel: 'Schedule',
-            drawerIcon: (({focused}) => <Icon name = { focused ? 'calendar-outline' : 'calendar' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
-          }}
-        />
-        <Drawer.Screen
-          name = "Booklet"
-          component = {bookletPage}
-          options = {{
-            drawerLabel: 'Booklet',
-            drawerIcon: (({focused}) => <Icon name = { focused ? 'book-outline' : 'book' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
-          }}
-        />
-        <Drawer.Screen
-          name = "Buses"
-          component = {busPage}
-          options = {{
-            drawerLabel: 'Buses',
-            drawerIcon: (({focused}) => <Icon name = { focused ? 'bus-outline' : 'bus' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
-          }}
-        />
-        <Drawer.Screen
-          name = "Campus Map"
-          component = {mapPage}
-          options = {{
-            drawerLabel: 'Campus Map',
-            drawerIcon: (({focused}) => <Icon name = { focused ? 'map-outline' : 'map' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
-          }}
-        />
-
-
-
-        <Drawer.Screen
-          name = "Get Help"
-          component = {helpPage}
-          options = {{
-            drawerLabel: 'Get Help',
-            drawerIcon: (({focused}) => <Icon name = { focused ? 'chatbubble-ellipses-outline' : 'chatbubble-ellipses' } size = {24} color = { focused ? config.defaultBkgColor : config.pjasBlue } />)
-          }}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
+    <Drawer.Navigator
+      swipeEdgeWidth = {500}
+      swipeMinDistance = {100}
+      drawerContent = {(props) => <CustomDrawer {...props} />}
+    >
+      <Drawer.Screen name="Home" component={homePage}/>
+      <Drawer.Screen name="Help & Info" component={helpPage}/>
+      <Drawer.Screen name="Schedule" component={schedulePage}/>
+      <Drawer.Screen name="AM Unit List" component={AMUnitList}/>
+      <Drawer.Screen name="PM Unit List" component={PMUnitList}/>
+      <Drawer.Screen name="Booklet" component={bookletPage}/>
+      <Drawer.Screen name="Dining Menu" component={diningMenuPage}/>
+      <Drawer.Screen name="Campus Map" component={mapPage}/>
+      <Drawer.Screen name="Bus Route" component={busPage}/>
+      <Drawer.Screen name="Awards & Scholarships" component={awardsScholarshipsPage}/>
+      <Drawer.Screen name="About This App" component={aboutPage}/>
+    </Drawer.Navigator>
+  )
 }
+
+const App = () => {
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <MyDrawer/>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  )
+}
+export default App

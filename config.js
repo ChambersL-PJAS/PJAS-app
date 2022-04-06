@@ -5,15 +5,25 @@ const config = {
   stateMeetEnd: 17,
   stateMeetLocation: `Penn State University Park Campus`,
 
+  infodeskLocation: 'INFO DESK LOCATION',
+  infodeskPhone: '(123) 456-7890',
+
+  nurseLocation: 'NURSE LOCATION',
+  nursePhone: '(484) 832-7163',
+
   /* COLORS */
   pjasBlue: '#122937',
   pjasBlue75percent: '#122937BF',
   pjasBlue75percent: '#122937BF',
   pjasLightBlue: '#367ba5',
   defaultBkgColor: '#eee',
+  lightGrey: '#bbb',
+  mediumGrey: '#aaa',
 
 
   /* FONT SIZES */
+  tinyTextSize: 12,
+  smallTextSize: 14,
   normTextSize: 16,
   h1TextSize: 28,
   h2TextSize: 25,
